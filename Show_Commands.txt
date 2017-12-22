@@ -1,0 +1,11 @@
+sh ip ospf nei <-- spine
+sh ip bgp sum  <-- spine
+sh ip pim nei  <-- spine
+
+sh nve vni <-- Leaf
+sh nve peers <-- Leaf
+sh ip route vrf Tenant-1 <-- Leaf
+sh bgp l2vpn evpn <-- Leaf
+sh l2route evpn mac-ip all <-- Leaf
+
+sh ip ospf nei <-- wan

@@ -1,0 +1,2246 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<topology xmlns="http://www.cisco.com/VIRL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="0.95" xsi:schemaLocation="http://www.cisco.com/VIRL https://raw.github.com/CiscoVIRL/schema/v0.95/virl.xsd">
+    <extensions>
+        <entry key="management_network" type="String">exclusive</entry>
+        <entry key="AutoNetkit.ipv4_loopback_subnet" type="String">10.0.0.0</entry>
+        <entry key="AutoNetkit.ipv4_infra_subnet" type="String">10.100.100.0</entry>
+        <entry key="AutoNetkit.ipv4_infra_prefix" type="String">24</entry>
+        <entry key="management_lxc" type="Boolean">false</entry>
+    </extensions>
+    <node name="Spine-1" type="SIMPLE" subtype="NX-OSv 9000" location="252,117" vmImage="christoo-NX-OSv 9000 [995f9cc5-4835-41f3-9fbe-d2b3f292d7f9]" vmFlavor="NX-OSv 9000 [2d0e9ebd-e4fe-4b2c-87ff-31397e8d73e9]" ipv4="10.0.0.1">
+        <extensions>
+            <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
+            <entry key="config" type="String">!Command: show running-config
+!Time: Fri Dec 22 15:26:46 2017
+
+version 7.0(3)I6(1)
+hostname Spine-1
+vdc Spine-1 id 1
+  limit-resource vlan minimum 16 maximum 4094
+  limit-resource vrf minimum 2 maximum 4096
+  limit-resource port-channel minimum 0 maximum 511
+  limit-resource u4route-mem minimum 96 maximum 96
+  limit-resource u6route-mem minimum 24 maximum 24
+  limit-resource m4route-mem minimum 58 maximum 58
+  limit-resource m6route-mem minimum 8 maximum 8
+
+feature telnet
+nv overlay evpn
+feature ospf
+feature bgp
+feature pim
+feature interface-vlan
+feature vn-segment-vlan-based
+feature nv overlay
+
+no password strength-check
+username admin password 5 $1$KuOSBsvW$Cy0TSD..gEBGBPjzpDgf51  role network-admin
+username adminbackup password 5 !  role network-operator
+username cisco password 5 $1$Nk7ZkwH0$fyiRmMMfIheqE3BqvcL0C1  role network-operator
+username cisco role network-admin
+username lab password 5 $1$buoy/oqy$.EXQz8rCn72ii8qtdldj00  role network-admin
+ip domain-lookup
+snmp-server user lab network-admin auth md5 0x5ceb414591539ee35159fca86fdfa101 priv 0x5ceb414591539ee35159fca86fdfa101 localizedkey
+snmp-server user admin network-admin auth md5 0x328945d53e05e8e7207f8c20b142f0b7 priv 0x328945d53e05e8e7207f8c20b142f0b7 localizedkey
+snmp-server user cisco network-operator auth md5 0x55b3c64a53fb95518e75358ee75e82e9 priv 0x55b3c64a53fb95518e75358ee75e82e9 localizedkey
+rmon event 1 log trap public description FATAL(1) owner PMON@FATAL
+rmon event 2 log trap public description CRITICAL(2) owner PMON@CRITICAL
+rmon event 3 log trap public description ERROR(3) owner PMON@ERROR
+rmon event 4 log trap public description WARNING(4) owner PMON@WARNING
+rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
+
+vlan 1
+ip pim rp-address 10.1.0.1 group-list 224.0.0.0/4
+ip pim ssm range 232.0.0.0/8
+ip pim anycast-rp 10.1.0.1 10.0.0.1
+ip pim anycast-rp 10.1.0.1 10.0.0.2
+
+vrf context management
+hardware forwarding unicast trace
+
+
+interface Vlan1
+  no shutdown
+
+interface Ethernet1/1
+  description to Leaf-1
+  no switchport
+  mtu 9216
+  medium p2p
+  ip unnumbered loopback0
+  ip ospf network point-to-point
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/2
+  description to Leaf-2
+  no switchport
+  mtu 9216
+  medium p2p
+  ip unnumbered loopback0
+  ip ospf network point-to-point
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/3
+  description to Leaf-3
+  no switchport
+  mtu 9216
+  medium p2p
+  ip unnumbered loopback0
+  ip ospf network point-to-point
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/4
+  description to Leaf-4
+  no switchport
+  mtu 9216
+  medium p2p
+  ip unnumbered loopback0
+  ip ospf network point-to-point
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/5
+
+interface Ethernet1/6
+
+interface Ethernet1/7
+
+interface Ethernet1/8
+
+interface Ethernet1/9
+
+interface Ethernet1/10
+
+interface Ethernet1/11
+
+interface Ethernet1/12
+
+interface Ethernet1/13
+
+interface Ethernet1/14
+
+interface Ethernet1/15
+
+interface Ethernet1/16
+
+interface Ethernet1/17
+
+interface Ethernet1/18
+
+interface Ethernet1/19
+
+interface Ethernet1/20
+
+interface Ethernet1/21
+
+interface Ethernet1/22
+
+interface Ethernet1/23
+
+interface Ethernet1/24
+
+interface Ethernet1/25
+
+interface Ethernet1/26
+
+interface Ethernet1/27
+
+interface Ethernet1/28
+
+interface Ethernet1/29
+
+interface Ethernet1/30
+
+interface Ethernet1/31
+
+interface Ethernet1/32
+
+interface Ethernet1/33
+
+interface Ethernet1/34
+
+interface Ethernet1/35
+
+interface Ethernet1/36
+
+interface Ethernet1/37
+
+interface Ethernet1/38
+
+interface Ethernet1/39
+
+interface Ethernet1/40
+
+interface Ethernet1/41
+
+interface Ethernet1/42
+
+interface Ethernet1/43
+
+interface Ethernet1/44
+
+interface Ethernet1/45
+
+interface Ethernet1/46
+
+interface Ethernet1/47
+
+interface Ethernet1/48
+
+interface Ethernet1/49
+
+interface Ethernet1/50
+
+interface Ethernet1/51
+
+interface Ethernet1/52
+
+interface Ethernet1/53
+
+interface Ethernet1/54
+
+interface Ethernet1/55
+
+interface Ethernet1/56
+
+interface Ethernet1/57
+
+interface Ethernet1/58
+
+interface Ethernet1/59
+
+interface Ethernet1/60
+
+interface Ethernet1/61
+
+interface Ethernet1/62
+
+interface Ethernet1/63
+
+interface Ethernet1/64
+
+interface mgmt0
+  description OOB Management
+  vrf member management
+  ip address 10.255.0.7/16
+
+interface loopback0
+  description Loopback
+  ip address 10.0.0.1/32
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+
+interface loopback1
+  ip address 10.1.0.1/32
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+line console
+line vty
+router ospf 1
+  router-id 10.0.0.1
+router bgp 65000
+  router-id 10.0.0.1
+  address-family ipv4 unicast
+  address-family l2vpn evpn
+    retain route-target all
+  template peer LEAF-PEER
+    remote-as 65000
+    update-source loopback0
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+      route-reflector-client
+    address-family l2vpn evpn
+      send-community
+      send-community extended
+      route-reflector-client
+  neighbor 10.0.0.3
+    inherit peer LEAF-PEER
+  neighbor 10.0.0.4
+    inherit peer LEAF-PEER
+  neighbor 10.0.0.5
+    inherit peer LEAF-PEER
+  neighbor 10.0.0.6
+    inherit peer LEAF-PEER</entry>
+        </extensions>
+        <interface id="0" name="Ethernet1/1" ipv4="10.100.100.9" netPrefixLenV4="30"/>
+        <interface id="1" name="Ethernet1/2" ipv4="10.100.100.13" netPrefixLenV4="30"/>
+        <interface id="2" name="Ethernet1/3" ipv4="10.100.100.17" netPrefixLenV4="30"/>
+        <interface id="3" name="Ethernet1/4" ipv4="10.100.100.21" netPrefixLenV4="30"/>
+    </node>
+    <node name="Spine-2" type="SIMPLE" subtype="NX-OSv 9000" location="375,115" vmImage="christoo-NX-OSv 9000 [995f9cc5-4835-41f3-9fbe-d2b3f292d7f9]" vmFlavor="NX-OSv 9000 [2d0e9ebd-e4fe-4b2c-87ff-31397e8d73e9]" ipv4="10.0.0.4">
+        <extensions>
+            <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
+            <entry key="config" type="String">!Command: show running-config
+!Time: Fri Dec 22 15:26:47 2017
+
+version 7.0(3)I6(1)
+hostname Spine-2
+vdc Spine-2 id 1
+  limit-resource vlan minimum 16 maximum 4094
+  limit-resource vrf minimum 2 maximum 4096
+  limit-resource port-channel minimum 0 maximum 511
+  limit-resource u4route-mem minimum 96 maximum 96
+  limit-resource u6route-mem minimum 24 maximum 24
+  limit-resource m4route-mem minimum 58 maximum 58
+  limit-resource m6route-mem minimum 8 maximum 8
+
+feature telnet
+feature nxapi
+feature bash-shell
+nv overlay evpn
+feature ospf
+feature bgp
+feature pim
+feature interface-vlan
+feature vn-segment-vlan-based
+feature nv overlay
+
+no password strength-check
+username admin password 5 $1$KuOSBsvW$Cy0TSD..gEBGBPjzpDgf51  role network-admin
+username adminbackup password 5 !  role network-operator
+username cisco password 5 $1$Nk7ZkwH0$fyiRmMMfIheqE3BqvcL0C1  role network-operator
+username cisco role network-admin
+username lab password 5 $1$buoy/oqy$.EXQz8rCn72ii8qtdldj00  role network-admin
+ip domain-lookup
+snmp-server user lab network-admin auth md5 0x5ceb414591539ee35159fca86fdfa101 priv 0x5ceb414591539ee35159fca86fdfa101 localizedkey
+snmp-server user admin network-admin auth md5 0x328945d53e05e8e7207f8c20b142f0b7 priv 0x328945d53e05e8e7207f8c20b142f0b7 localizedkey
+snmp-server user cisco network-operator auth md5 0x55b3c64a53fb95518e75358ee75e82e9 priv 0x55b3c64a53fb95518e75358ee75e82e9 localizedkey
+rmon event 1 log trap public description FATAL(1) owner PMON@FATAL
+rmon event 2 log trap public description CRITICAL(2) owner PMON@CRITICAL
+rmon event 3 log trap public description ERROR(3) owner PMON@ERROR
+rmon event 4 log trap public description WARNING(4) owner PMON@WARNING
+rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
+
+vlan 1
+ip pim rp-address 10.1.0.1 group-list 224.0.0.0/4
+ip pim ssm range 232.0.0.0/8
+ip pim anycast-rp 10.1.0.1 10.0.0.1
+ip pim anycast-rp 10.1.0.1 10.0.0.2
+
+vrf context management
+hardware forwarding unicast trace
+
+
+interface Vlan1
+  no shutdown
+
+interface Ethernet1/1
+  description to Leaf-1
+  no switchport
+  mtu 9216
+  medium p2p
+  ip unnumbered loopback0
+  ip ospf network point-to-point
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/2
+  description to Leaf-2
+  no switchport
+  mtu 9216
+  medium p2p
+  ip unnumbered loopback0
+  ip ospf network point-to-point
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/3
+  description to Leaf-3
+  no switchport
+  mtu 9216
+  medium p2p
+  ip unnumbered loopback0
+  ip ospf network point-to-point
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/4
+  description to Leaf-4
+  no switchport
+  mtu 9216
+  medium p2p
+  ip unnumbered loopback0
+  ip ospf network point-to-point
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/5
+
+interface Ethernet1/6
+
+interface Ethernet1/7
+
+interface Ethernet1/8
+
+interface Ethernet1/9
+
+interface Ethernet1/10
+
+interface Ethernet1/11
+
+interface Ethernet1/12
+
+interface Ethernet1/13
+
+interface Ethernet1/14
+
+interface Ethernet1/15
+
+interface Ethernet1/16
+
+interface Ethernet1/17
+
+interface Ethernet1/18
+
+interface Ethernet1/19
+
+interface Ethernet1/20
+
+interface Ethernet1/21
+
+interface Ethernet1/22
+
+interface Ethernet1/23
+
+interface Ethernet1/24
+
+interface Ethernet1/25
+
+interface Ethernet1/26
+
+interface Ethernet1/27
+
+interface Ethernet1/28
+
+interface Ethernet1/29
+
+interface Ethernet1/30
+
+interface Ethernet1/31
+
+interface Ethernet1/32
+
+interface Ethernet1/33
+
+interface Ethernet1/34
+
+interface Ethernet1/35
+
+interface Ethernet1/36
+
+interface Ethernet1/37
+
+interface Ethernet1/38
+
+interface Ethernet1/39
+
+interface Ethernet1/40
+
+interface Ethernet1/41
+
+interface Ethernet1/42
+
+interface Ethernet1/43
+
+interface Ethernet1/44
+
+interface Ethernet1/45
+
+interface Ethernet1/46
+
+interface Ethernet1/47
+
+interface Ethernet1/48
+
+interface Ethernet1/49
+
+interface Ethernet1/50
+
+interface Ethernet1/51
+
+interface Ethernet1/52
+
+interface Ethernet1/53
+
+interface Ethernet1/54
+
+interface Ethernet1/55
+
+interface Ethernet1/56
+
+interface Ethernet1/57
+
+interface Ethernet1/58
+
+interface Ethernet1/59
+
+interface Ethernet1/60
+
+interface Ethernet1/61
+
+interface Ethernet1/62
+
+interface Ethernet1/63
+
+interface Ethernet1/64
+
+interface mgmt0
+  description OOB Management
+  vrf member management
+  ip address 10.255.0.13/16
+
+interface loopback0
+  description Loopback
+  ip address 10.0.0.2/32
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+
+interface loopback1
+  ip address 10.1.0.1/32
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+line console
+line vty
+router ospf 1
+  router-id 10.0.0.2
+router bgp 65000
+  router-id 10.0.0.2
+  address-family ipv4 unicast
+  address-family l2vpn evpn
+    retain route-target all
+  template peer LEAF-PEER
+    remote-as 65000
+    update-source loopback0
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+      route-reflector-client
+    address-family l2vpn evpn
+      send-community
+      send-community extended
+      route-reflector-client
+  neighbor 10.0.0.3
+    inherit peer LEAF-PEER
+  neighbor 10.0.0.4
+    inherit peer LEAF-PEER
+  neighbor 10.0.0.5
+    inherit peer LEAF-PEER
+  neighbor 10.0.0.6
+    inherit peer LEAF-PEER</entry>
+        </extensions>
+        <interface id="0" name="Ethernet1/1" ipv4="10.100.100.25" netPrefixLenV4="30"/>
+        <interface id="1" name="Ethernet1/2" ipv4="10.100.100.29" netPrefixLenV4="30"/>
+        <interface id="2" name="Ethernet1/3" ipv4="10.100.100.33" netPrefixLenV4="30"/>
+        <interface id="3" name="Ethernet1/4" ipv4="10.100.100.41" netPrefixLenV4="30"/>
+    </node>
+    <node name="Leaf-1" type="SIMPLE" subtype="NX-OSv 9000" location="132,226" vmImage="christoo-NX-OSv 9000 [995f9cc5-4835-41f3-9fbe-d2b3f292d7f9]" vmFlavor="NX-OSv 9000 [2d0e9ebd-e4fe-4b2c-87ff-31397e8d73e9]" ipv4="10.0.0.6">
+        <extensions>
+            <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
+            <entry key="config" type="String">!Command: show running-config
+!Time: Fri Dec 22 15:26:47 2017
+
+version 7.0(3)I6(1)
+hostname Leaf-1
+vdc Leaf-1 id 1
+  limit-resource vlan minimum 16 maximum 4094
+  limit-resource vrf minimum 2 maximum 4096
+  limit-resource port-channel minimum 0 maximum 511
+  limit-resource u4route-mem minimum 96 maximum 96
+  limit-resource u6route-mem minimum 24 maximum 24
+  limit-resource m4route-mem minimum 58 maximum 58
+  limit-resource m6route-mem minimum 8 maximum 8
+
+feature telnet
+feature nxapi
+feature bash-shell
+nv overlay evpn
+feature ospf
+feature bgp
+feature pim
+feature interface-vlan
+feature vn-segment-vlan-based
+feature nv overlay
+
+no password strength-check
+username admin password 5 $1$KuOSBsvW$Cy0TSD..gEBGBPjzpDgf51  role network-admin
+username adminbackup password 5 !  role network-operator
+username cisco password 5 $1$Nk7ZkwH0$fyiRmMMfIheqE3BqvcL0C1  role network-operator
+username cisco role network-admin
+username lab password 5 $1$buoy/oqy$.EXQz8rCn72ii8qtdldj00  role network-admin
+ip domain-lookup
+snmp-server user lab network-admin auth md5 0x5ceb414591539ee35159fca86fdfa101 priv 0x5ceb414591539ee35159fca86fdfa101 localizedkey
+snmp-server user admin network-admin auth md5 0x328945d53e05e8e7207f8c20b142f0b7 priv 0x328945d53e05e8e7207f8c20b142f0b7 localizedkey
+snmp-server user cisco network-operator auth md5 0x55b3c64a53fb95518e75358ee75e82e9 priv 0x55b3c64a53fb95518e75358ee75e82e9 localizedkey
+rmon event 1 log trap public description FATAL(1) owner PMON@FATAL
+rmon event 2 log trap public description CRITICAL(2) owner PMON@CRITICAL
+rmon event 3 log trap public description ERROR(3) owner PMON@ERROR
+rmon event 4 log trap public description WARNING(4) owner PMON@WARNING
+rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
+
+vlan 1,140-141,999
+fabric forwarding anycast-gateway-mac 0000.2222.3333
+ip pim rp-address 10.1.0.1 group-list 224.0.0.0/4
+ip pim ssm range 232.0.0.0/8
+vlan 140
+  name L2-VNI-140-Tenant1
+  vn-segment 50140
+vlan 141
+  name L2-VNI-141-Tenant1
+  vn-segment 50141
+vlan 999
+  vn-segment 50999
+
+spanning-tree vlan 1,140-141,999 priority 4096
+vrf context Tenant-1
+  vni 50999
+  rd auto
+  address-family ipv4 unicast
+    route-target both auto
+    route-target both auto evpn
+vrf context management
+hardware forwarding unicast trace
+
+
+interface Vlan1
+  no shutdown
+
+interface Vlan140
+  no shutdown
+  vrf member Tenant-1
+  no ip redirects
+  ip address 172.21.140.1/24
+  fabric forwarding mode anycast-gateway
+
+interface Vlan141
+  no shutdown
+  vrf member Tenant-1
+  no ip redirects
+  ip address 172.21.141.1/24
+  fabric forwarding mode anycast-gateway
+
+interface Vlan999
+  no shutdown
+  vrf member Tenant-1
+  ip forward
+
+interface nve1
+  no shutdown
+  source-interface loopback1
+  host-reachability protocol bgp
+  member vni 50140
+    mcast-group 239.0.0.140
+  member vni 50141
+    mcast-group 239.0.0.141
+  member vni 50999 associate-vrf
+
+interface Ethernet1/1
+  description to Spine-1
+  no switchport
+  mtu 9216
+  medium p2p
+  ip unnumbered loopback0
+  ip ospf network point-to-point
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/2
+  description to Spine-2
+  no switchport
+  mtu 9216
+  medium p2p
+  ip unnumbered loopback0
+  ip ospf network point-to-point
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/3
+  description Server-1
+  switchport access vlan 140
+
+interface Ethernet1/4
+
+interface Ethernet1/5
+
+interface Ethernet1/6
+
+interface Ethernet1/7
+
+interface Ethernet1/8
+
+interface Ethernet1/9
+
+interface Ethernet1/10
+
+interface Ethernet1/11
+
+interface Ethernet1/12
+
+interface Ethernet1/13
+
+interface Ethernet1/14
+
+interface Ethernet1/15
+
+interface Ethernet1/16
+
+interface Ethernet1/17
+
+interface Ethernet1/18
+
+interface Ethernet1/19
+
+interface Ethernet1/20
+
+interface Ethernet1/21
+
+interface Ethernet1/22
+
+interface Ethernet1/23
+
+interface Ethernet1/24
+
+interface Ethernet1/25
+
+interface Ethernet1/26
+
+interface Ethernet1/27
+
+interface Ethernet1/28
+
+interface Ethernet1/29
+
+interface Ethernet1/30
+
+interface Ethernet1/31
+
+interface Ethernet1/32
+
+interface Ethernet1/33
+
+interface Ethernet1/34
+
+interface Ethernet1/35
+
+interface Ethernet1/36
+
+interface Ethernet1/37
+
+interface Ethernet1/38
+
+interface Ethernet1/39
+
+interface Ethernet1/40
+
+interface Ethernet1/41
+
+interface Ethernet1/42
+
+interface Ethernet1/43
+
+interface Ethernet1/44
+
+interface Ethernet1/45
+
+interface Ethernet1/46
+
+interface Ethernet1/47
+
+interface Ethernet1/48
+
+interface Ethernet1/49
+
+interface Ethernet1/50
+
+interface Ethernet1/51
+
+interface Ethernet1/52
+
+interface Ethernet1/53
+
+interface Ethernet1/54
+
+interface Ethernet1/55
+
+interface Ethernet1/56
+
+interface Ethernet1/57
+
+interface Ethernet1/58
+
+interface Ethernet1/59
+
+interface Ethernet1/60
+
+interface Ethernet1/61
+
+interface Ethernet1/62
+
+interface Ethernet1/63
+
+interface Ethernet1/64
+
+interface mgmt0
+  description OOB Management
+  vrf member management
+  ip address 10.255.0.1/16
+
+interface loopback0
+  description Loopback
+  ip address 10.0.0.3/32
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+
+interface loopback1
+  description VXLAN VTEP
+  ip address 10.1.0.3/32
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+line console
+line vty
+router ospf 1
+  router-id 10.0.0.3
+router bgp 65000
+  router-id 10.0.0.3
+  address-family ipv4 unicast
+  address-family l2vpn evpn
+    retain route-target all
+  neighbor 10.0.0.1
+    remote-as 65000
+    update-source loopback0
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+    address-family l2vpn evpn
+      send-community
+      send-community extended
+  neighbor 10.0.0.2
+    remote-as 65000
+    update-source loopback0
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+    address-family l2vpn evpn
+      send-community
+      send-community extended
+evpn
+  vni 50140 l2
+    rd auto
+    route-target import auto
+    route-target export auto
+  vni 50141 l2
+    rd auto
+    route-target import auto
+    route-target export auto</entry>
+        </extensions>
+        <interface id="0" name="Ethernet1/1" ipv4="10.100.100.10" netPrefixLenV4="30"/>
+        <interface id="1" name="Ethernet1/2" ipv4="10.100.100.26" netPrefixLenV4="30"/>
+        <interface id="2" name="Ethernet1/3" ipv4="10.100.100.5" netPrefixLenV4="30"/>
+    </node>
+    <node name="Leaf-2" type="SIMPLE" subtype="NX-OSv 9000" location="255,220" vmImage="christoo-NX-OSv 9000 [995f9cc5-4835-41f3-9fbe-d2b3f292d7f9]" vmFlavor="NX-OSv 9000 [2d0e9ebd-e4fe-4b2c-87ff-31397e8d73e9]" ipv4="10.0.0.7">
+        <extensions>
+            <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
+            <entry key="config" type="String">!Command: show running-config
+!Time: Fri Dec 22 15:26:47 2017
+
+version 7.0(3)I6(1)
+hostname Leaf-2
+vdc Leaf-2 id 1
+  limit-resource vlan minimum 16 maximum 4094
+  limit-resource vrf minimum 2 maximum 4096
+  limit-resource port-channel minimum 0 maximum 511
+  limit-resource u4route-mem minimum 96 maximum 96
+  limit-resource u6route-mem minimum 24 maximum 24
+  limit-resource m4route-mem minimum 58 maximum 58
+  limit-resource m6route-mem minimum 8 maximum 8
+
+feature telnet
+feature nxapi
+feature bash-shell
+nv overlay evpn
+feature ospf
+feature bgp
+feature pim
+feature interface-vlan
+feature vn-segment-vlan-based
+feature nv overlay
+
+no password strength-check
+username admin password 5 $1$KuOSBsvW$Cy0TSD..gEBGBPjzpDgf51  role network-admin
+username adminbackup password 5 !  role network-operator
+username cisco password 5 $1$Nk7ZkwH0$fyiRmMMfIheqE3BqvcL0C1  role network-operator
+username cisco role network-admin
+username lab password 5 $1$buoy/oqy$.EXQz8rCn72ii8qtdldj00  role network-admin
+ip domain-lookup
+snmp-server user lab network-admin auth md5 0x5ceb414591539ee35159fca86fdfa101 priv 0x5ceb414591539ee35159fca86fdfa101 localizedkey
+snmp-server user admin network-admin auth md5 0x328945d53e05e8e7207f8c20b142f0b7 priv 0x328945d53e05e8e7207f8c20b142f0b7 localizedkey
+snmp-server user cisco network-operator auth md5 0x55b3c64a53fb95518e75358ee75e82e9 priv 0x55b3c64a53fb95518e75358ee75e82e9 localizedkey
+rmon event 1 log trap public description FATAL(1) owner PMON@FATAL
+rmon event 2 log trap public description CRITICAL(2) owner PMON@CRITICAL
+rmon event 3 log trap public description ERROR(3) owner PMON@ERROR
+rmon event 4 log trap public description WARNING(4) owner PMON@WARNING
+rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
+
+vlan 1,140-141,999
+fabric forwarding anycast-gateway-mac 0000.2222.3333
+ip pim rp-address 10.1.0.1 group-list 224.0.0.0/4
+ip pim ssm range 232.0.0.0/8
+vlan 140
+  name L2-VNI-140-Tenant1
+  vn-segment 50140
+vlan 141
+  name L2-VNI-141-Tenant1
+  vn-segment 50141
+vlan 999
+  vn-segment 50999
+
+spanning-tree vlan 1,140-141,999 priority 4096
+vrf context Tenant-1
+  vni 50999
+  rd auto
+  address-family ipv4 unicast
+    route-target both auto
+    route-target both auto evpn
+vrf context management
+hardware forwarding unicast trace
+
+
+interface Vlan1
+  no shutdown
+
+interface Vlan140
+  no shutdown
+  vrf member Tenant-1
+  no ip redirects
+  ip address 172.21.140.1/24
+  fabric forwarding mode anycast-gateway
+
+interface Vlan141
+  no shutdown
+  vrf member Tenant-1
+  no ip redirects
+  ip address 172.21.141.1/24
+  fabric forwarding mode anycast-gateway
+
+interface Vlan999
+  no shutdown
+  vrf member Tenant-1
+  ip forward
+
+interface nve1
+  no shutdown
+  source-interface loopback1
+  host-reachability protocol bgp
+  member vni 50140
+    mcast-group 239.0.0.140
+  member vni 50141
+    mcast-group 239.0.0.141
+  member vni 50999 associate-vrf
+
+interface Ethernet1/1
+  description to Spine-1
+  no switchport
+  mtu 9216
+  medium p2p
+  ip unnumbered loopback0
+  ip ospf network point-to-point
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/2
+  description to Spine-2
+  no switchport
+  mtu 9216
+  medium p2p
+  ip unnumbered loopback0
+  ip ospf network point-to-point
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/3
+
+interface Ethernet1/4
+
+interface Ethernet1/5
+
+interface Ethernet1/6
+
+interface Ethernet1/7
+
+interface Ethernet1/8
+
+interface Ethernet1/9
+
+interface Ethernet1/10
+
+interface Ethernet1/11
+
+interface Ethernet1/12
+
+interface Ethernet1/13
+
+interface Ethernet1/14
+
+interface Ethernet1/15
+
+interface Ethernet1/16
+
+interface Ethernet1/17
+
+interface Ethernet1/18
+
+interface Ethernet1/19
+
+interface Ethernet1/20
+
+interface Ethernet1/21
+
+interface Ethernet1/22
+
+interface Ethernet1/23
+
+interface Ethernet1/24
+
+interface Ethernet1/25
+
+interface Ethernet1/26
+
+interface Ethernet1/27
+
+interface Ethernet1/28
+
+interface Ethernet1/29
+
+interface Ethernet1/30
+
+interface Ethernet1/31
+
+interface Ethernet1/32
+
+interface Ethernet1/33
+
+interface Ethernet1/34
+
+interface Ethernet1/35
+
+interface Ethernet1/36
+
+interface Ethernet1/37
+
+interface Ethernet1/38
+
+interface Ethernet1/39
+
+interface Ethernet1/40
+
+interface Ethernet1/41
+
+interface Ethernet1/42
+
+interface Ethernet1/43
+
+interface Ethernet1/44
+
+interface Ethernet1/45
+
+interface Ethernet1/46
+
+interface Ethernet1/47
+
+interface Ethernet1/48
+
+interface Ethernet1/49
+
+interface Ethernet1/50
+
+interface Ethernet1/51
+
+interface Ethernet1/52
+
+interface Ethernet1/53
+
+interface Ethernet1/54
+
+interface Ethernet1/55
+
+interface Ethernet1/56
+
+interface Ethernet1/57
+
+interface Ethernet1/58
+
+interface Ethernet1/59
+
+interface Ethernet1/60
+
+interface Ethernet1/61
+
+interface Ethernet1/62
+
+interface Ethernet1/63
+
+interface Ethernet1/64
+
+interface mgmt0
+  description OOB Management
+  vrf member management
+  ip address 10.255.0.2/16
+
+interface loopback0
+  description Loopback
+  ip address 10.0.0.4/32
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+
+interface loopback1
+  description VXLAN VTEP
+  ip address 10.1.0.4/32
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+line console
+line vty
+router ospf 1
+  router-id 10.0.0.4
+router bgp 65000
+  router-id 10.0.0.4
+  address-family ipv4 unicast
+  address-family l2vpn evpn
+    retain route-target all
+  neighbor 10.0.0.1
+    remote-as 65000
+    update-source loopback0
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+    address-family l2vpn evpn
+      send-community
+      send-community extended
+  neighbor 10.0.0.2
+    remote-as 65000
+    update-source loopback0
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+    address-family l2vpn evpn
+      send-community
+      send-community extended
+evpn
+  vni 50140 l2
+    rd auto
+    route-target import auto
+    route-target export auto
+  vni 50141 l2
+    rd auto
+    route-target import auto
+    route-target export auto</entry>
+        </extensions>
+        <interface id="0" name="Ethernet1/1" ipv4="10.100.100.14" netPrefixLenV4="30"/>
+        <interface id="1" name="Ethernet1/2" ipv4="10.100.100.30" netPrefixLenV4="30"/>
+    </node>
+    <node name="Leaf-3" type="SIMPLE" subtype="NX-OSv 9000" location="381,216" vmImage="christoo-NX-OSv 9000 [995f9cc5-4835-41f3-9fbe-d2b3f292d7f9]" vmFlavor="NX-OSv 9000 [2d0e9ebd-e4fe-4b2c-87ff-31397e8d73e9]" ipv4="10.0.0.8">
+        <extensions>
+            <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
+            <entry key="config" type="String">!Command: show running-config
+!Time: Fri Dec 22 15:26:46 2017
+
+version 7.0(3)I6(1)
+hostname Leaf-3
+vdc Leaf-3 id 1
+  limit-resource vlan minimum 16 maximum 4094
+  limit-resource vrf minimum 2 maximum 4096
+  limit-resource port-channel minimum 0 maximum 511
+  limit-resource u4route-mem minimum 96 maximum 96
+  limit-resource u6route-mem minimum 24 maximum 24
+  limit-resource m4route-mem minimum 58 maximum 58
+  limit-resource m6route-mem minimum 8 maximum 8
+
+feature telnet
+nv overlay evpn
+feature ospf
+feature bgp
+feature pim
+feature interface-vlan
+feature vn-segment-vlan-based
+feature nv overlay
+
+no password strength-check
+username admin password 5 $1$KuOSBsvW$Cy0TSD..gEBGBPjzpDgf51  role network-admin
+username adminbackup password 5 !  role network-operator
+username cisco password 5 $1$Nk7ZkwH0$fyiRmMMfIheqE3BqvcL0C1  role network-operator
+username cisco role network-admin
+username lab password 5 $1$buoy/oqy$.EXQz8rCn72ii8qtdldj00  role network-admin
+ip domain-lookup
+snmp-server user lab network-admin auth md5 0x5ceb414591539ee35159fca86fdfa101 priv 0x5ceb414591539ee35159fca86fdfa101 localizedkey
+snmp-server user admin network-admin auth md5 0x328945d53e05e8e7207f8c20b142f0b7 priv 0x328945d53e05e8e7207f8c20b142f0b7 localizedkey
+snmp-server user cisco network-operator auth md5 0x55b3c64a53fb95518e75358ee75e82e9 priv 0x55b3c64a53fb95518e75358ee75e82e9 localizedkey
+rmon event 1 log trap public description FATAL(1) owner PMON@FATAL
+rmon event 2 log trap public description CRITICAL(2) owner PMON@CRITICAL
+rmon event 3 log trap public description ERROR(3) owner PMON@ERROR
+rmon event 4 log trap public description WARNING(4) owner PMON@WARNING
+rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
+
+vlan 1,140-141,999
+fabric forwarding anycast-gateway-mac 0000.0222.3333
+ip pim rp-address 10.1.0.1 group-list 224.0.0.0/4
+ip pim ssm range 232.0.0.0/8
+vlan 140
+  name L2-VNI-140-Tenant1
+  vn-segment 50140
+vlan 141
+  name L2-VNI-141-Tenant1
+  vn-segment 50141
+vlan 999
+  vn-segment 50999
+
+spanning-tree vlan 1,140-141,999 priority 4096
+vrf context Tenant-1
+  vni 50999
+  rd auto
+  address-family ipv4 unicast
+    route-target both auto
+    route-target both auto evpn
+vrf context management
+hardware forwarding unicast trace
+
+
+interface Vlan1
+
+interface Vlan140
+  no shutdown
+  vrf member Tenant-1
+  no ip redirects
+  ip address 172.21.140.1/24
+  fabric forwarding mode anycast-gateway
+
+interface Vlan141
+  no shutdown
+  vrf member Tenant-1
+  no ip redirects
+  ip address 172.21.141.1/24
+  fabric forwarding mode anycast-gateway
+
+interface Vlan999
+  no shutdown
+  vrf member Tenant-1
+  ip forward
+
+interface nve1
+  no shutdown
+  source-interface loopback1
+  host-reachability protocol bgp
+  member vni 50140
+    mcast-group 239.0.0.140
+  member vni 50141
+    mcast-group 239.0.0.141
+  member vni 50999 associate-vrf
+
+interface Ethernet1/1
+  description to Spine-1
+  no switchport
+  mtu 9216
+  mac-address fa16.3e00.0012
+  medium p2p
+  ip unnumbered loopback0
+  ip ospf network point-to-point
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/2
+  description to Spine-2
+  no switchport
+  mtu 9216
+  mac-address fa16.3e00.0013
+  medium p2p
+  ip unnumbered loopback0
+  ip ospf network point-to-point
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/3
+  description to Server-2
+  switchport access vlan 141
+
+interface Ethernet1/4
+
+interface Ethernet1/5
+
+interface Ethernet1/6
+
+interface Ethernet1/7
+
+interface Ethernet1/8
+
+interface Ethernet1/9
+
+interface Ethernet1/10
+
+interface Ethernet1/11
+
+interface Ethernet1/12
+
+interface Ethernet1/13
+
+interface Ethernet1/14
+
+interface Ethernet1/15
+
+interface Ethernet1/16
+
+interface Ethernet1/17
+
+interface Ethernet1/18
+
+interface Ethernet1/19
+
+interface Ethernet1/20
+
+interface Ethernet1/21
+
+interface Ethernet1/22
+
+interface Ethernet1/23
+
+interface Ethernet1/24
+
+interface Ethernet1/25
+
+interface Ethernet1/26
+
+interface Ethernet1/27
+
+interface Ethernet1/28
+
+interface Ethernet1/29
+
+interface Ethernet1/30
+
+interface Ethernet1/31
+
+interface Ethernet1/32
+
+interface Ethernet1/33
+
+interface Ethernet1/34
+
+interface Ethernet1/35
+
+interface Ethernet1/36
+
+interface Ethernet1/37
+
+interface Ethernet1/38
+
+interface Ethernet1/39
+
+interface Ethernet1/40
+
+interface Ethernet1/41
+
+interface Ethernet1/42
+
+interface Ethernet1/43
+
+interface Ethernet1/44
+
+interface Ethernet1/45
+
+interface Ethernet1/46
+
+interface Ethernet1/47
+
+interface Ethernet1/48
+
+interface Ethernet1/49
+
+interface Ethernet1/50
+
+interface Ethernet1/51
+
+interface Ethernet1/52
+
+interface Ethernet1/53
+
+interface Ethernet1/54
+
+interface Ethernet1/55
+
+interface Ethernet1/56
+
+interface Ethernet1/57
+
+interface Ethernet1/58
+
+interface Ethernet1/59
+
+interface Ethernet1/60
+
+interface Ethernet1/61
+
+interface Ethernet1/62
+
+interface Ethernet1/63
+
+interface Ethernet1/64
+
+interface mgmt0
+  description OOB Management
+  vrf member management
+  ip address 10.255.0.3/16
+
+interface loopback0
+  ip address 10.0.0.5/32
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+
+interface loopback1
+  description VXLAN VTEP
+  ip address 10.1.0.5/32
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+line console
+line vty
+router ospf 1
+  router-id 10.0.0.5
+router bgp 65000
+  router-id 10.0.0.5
+  address-family ipv4 unicast
+  address-family l2vpn evpn
+    retain route-target all
+  neighbor 10.0.0.1
+    remote-as 65000
+    update-source loopback0
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+    address-family l2vpn evpn
+      send-community
+      send-community extended
+  neighbor 10.0.0.2
+    remote-as 65000
+    update-source loopback0
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+    address-family l2vpn evpn
+      send-community
+      send-community extended
+evpn
+  vni 50140 l2
+    rd auto
+    route-target import auto
+    route-target export auto
+  vni 50141 l2
+    rd auto
+    route-target import auto
+    route-target export auto</entry>
+        </extensions>
+        <interface id="0" name="Ethernet1/1" ipv4="10.100.100.18" netPrefixLenV4="30"/>
+        <interface id="1" name="Ethernet1/2" ipv4="10.100.100.34" netPrefixLenV4="30"/>
+        <interface id="2" name="Ethernet1/3" ipv4="10.100.100.37" netPrefixLenV4="30"/>
+    </node>
+    <node name="Leaf-4" type="SIMPLE" subtype="NX-OSv 9000" location="508,214" vmImage="christoo-NX-OSv 9000 [995f9cc5-4835-41f3-9fbe-d2b3f292d7f9]" vmFlavor="NX-OSv 9000 [2d0e9ebd-e4fe-4b2c-87ff-31397e8d73e9]" ipv4="10.0.0.9">
+        <extensions>
+            <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
+            <entry key="config" type="String">!Command: show running-config
+!Time: Fri Dec 22 15:26:46 2017
+
+version 7.0(3)I6(1)
+hostname Leaf-4
+vdc Leaf-4 id 1
+  limit-resource vlan minimum 16 maximum 4094
+  limit-resource vrf minimum 2 maximum 4096
+  limit-resource port-channel minimum 0 maximum 511
+  limit-resource u4route-mem minimum 96 maximum 96
+  limit-resource u6route-mem minimum 24 maximum 24
+  limit-resource m4route-mem minimum 58 maximum 58
+  limit-resource m6route-mem minimum 8 maximum 8
+
+feature telnet
+nv overlay evpn
+feature ospf
+feature bgp
+feature pim
+feature interface-vlan
+feature vn-segment-vlan-based
+feature nv overlay
+
+no password strength-check
+username admin password 5 $1$KuOSBsvW$Cy0TSD..gEBGBPjzpDgf51  role network-admin
+username adminbackup password 5 !  role network-operator
+username cisco password 5 $1$Nk7ZkwH0$fyiRmMMfIheqE3BqvcL0C1  role network-operator
+username cisco role network-admin
+username lab password 5 $1$buoy/oqy$.EXQz8rCn72ii8qtdldj00  role network-admin
+ip domain-lookup
+snmp-server user lab network-admin auth md5 0x5ceb414591539ee35159fca86fdfa101 priv 0x5ceb414591539ee35159fca86fdfa101 localizedkey
+snmp-server user admin network-admin auth md5 0x328945d53e05e8e7207f8c20b142f0b7 priv 0x328945d53e05e8e7207f8c20b142f0b7 localizedkey
+snmp-server user cisco network-operator auth md5 0x55b3c64a53fb95518e75358ee75e82e9 priv 0x55b3c64a53fb95518e75358ee75e82e9 localizedkey
+rmon event 1 log trap public description FATAL(1) owner PMON@FATAL
+rmon event 2 log trap public description CRITICAL(2) owner PMON@CRITICAL
+rmon event 3 log trap public description ERROR(3) owner PMON@ERROR
+rmon event 4 log trap public description WARNING(4) owner PMON@WARNING
+rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
+
+vlan 1,140-141,999
+fabric forwarding anycast-gateway-mac 0000.0222.3333
+ip pim rp-address 10.1.0.1 group-list 224.0.0.0/4
+ip pim ssm range 232.0.0.0/8
+vlan 140
+  name L2-VNI-140-Tenant1
+  vn-segment 50140
+vlan 141
+  name L2-VNI-141-Tenant1
+  vn-segment 50141
+vlan 999
+  vn-segment 50999
+
+spanning-tree vlan 1,140-141,999 priority 4096
+route-map permit-bgp-ospf permit 10
+route-map permit-ospf-bgp permit 10
+vrf context Tenant-1
+  vni 50999
+  rd auto
+  address-family ipv4 unicast
+    route-target both auto
+    route-target both auto evpn
+vrf context management
+hardware forwarding unicast trace
+
+
+interface Vlan1
+
+interface Vlan140
+  no shutdown
+  vrf member Tenant-1
+  no ip redirects
+  ip address 172.21.140.1/24
+  fabric forwarding mode anycast-gateway
+
+interface Vlan141
+  no shutdown
+  vrf member Tenant-1
+  no ip redirects
+  ip address 172.21.141.1/24
+  fabric forwarding mode anycast-gateway
+
+interface Vlan999
+  no shutdown
+  vrf member Tenant-1
+  ip forward
+
+interface nve1
+  no shutdown
+  source-interface loopback1
+  host-reachability protocol bgp
+  member vni 50140
+    mcast-group 239.0.0.140
+  member vni 50141
+    mcast-group 239.0.0.141
+  member vni 50999 associate-vrf
+
+interface Ethernet1/1
+  description to Spine-1
+  no switchport
+  mtu 9216
+  mac-address fa16.3e00.0016
+  medium p2p
+  ip unnumbered loopback0
+  ip ospf network point-to-point
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/2
+  description to Spine-2
+  no switchport
+  mtu 9216
+  mac-address fa16.3e00.0017
+  medium p2p
+  ip unnumbered loopback0
+  ip ospf network point-to-point
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+  no shutdown
+
+interface Ethernet1/3
+  description to WAN
+  no switchport
+  mtu 9216
+  no shutdown
+
+interface Ethernet1/3.101
+  description Customer 1
+  mtu 9216
+  encapsulation dot1q 101
+  vrf member Tenant-1
+  ip address 10.10.10.18/30
+  ip ospf network point-to-point
+  ip router ospf 1 area 0.0.0.0
+  no shutdown
+
+interface Ethernet1/4
+
+interface Ethernet1/5
+
+interface Ethernet1/6
+
+interface Ethernet1/7
+
+interface Ethernet1/8
+
+interface Ethernet1/9
+
+interface Ethernet1/10
+
+interface Ethernet1/11
+
+interface Ethernet1/12
+
+interface Ethernet1/13
+
+interface Ethernet1/14
+
+interface Ethernet1/15
+
+interface Ethernet1/16
+
+interface Ethernet1/17
+
+interface Ethernet1/18
+
+interface Ethernet1/19
+
+interface Ethernet1/20
+
+interface Ethernet1/21
+
+interface Ethernet1/22
+
+interface Ethernet1/23
+
+interface Ethernet1/24
+
+interface Ethernet1/25
+
+interface Ethernet1/26
+
+interface Ethernet1/27
+
+interface Ethernet1/28
+
+interface Ethernet1/29
+
+interface Ethernet1/30
+
+interface Ethernet1/31
+
+interface Ethernet1/32
+
+interface Ethernet1/33
+
+interface Ethernet1/34
+
+interface Ethernet1/35
+
+interface Ethernet1/36
+
+interface Ethernet1/37
+
+interface Ethernet1/38
+
+interface Ethernet1/39
+
+interface Ethernet1/40
+
+interface Ethernet1/41
+
+interface Ethernet1/42
+
+interface Ethernet1/43
+
+interface Ethernet1/44
+
+interface Ethernet1/45
+
+interface Ethernet1/46
+
+interface Ethernet1/47
+
+interface Ethernet1/48
+
+interface Ethernet1/49
+
+interface Ethernet1/50
+
+interface Ethernet1/51
+
+interface Ethernet1/52
+
+interface Ethernet1/53
+
+interface Ethernet1/54
+
+interface Ethernet1/55
+
+interface Ethernet1/56
+
+interface Ethernet1/57
+
+interface Ethernet1/58
+
+interface Ethernet1/59
+
+interface Ethernet1/60
+
+interface Ethernet1/61
+
+interface Ethernet1/62
+
+interface Ethernet1/63
+
+interface Ethernet1/64
+
+interface mgmt0
+  description OOB Management
+  vrf member management
+  ip address 10.255.0.4/16
+
+interface loopback0
+  description Loopback
+  ip address 10.0.0.6/32
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+
+interface loopback1
+  description VXLAN VTEP
+  ip address 10.1.0.6/32
+  ip router ospf 1 area 0.0.0.0
+  ip pim sparse-mode
+line console
+line vty
+router ospf 1
+  router-id 10.0.0.6
+  vrf Tenant-1
+    redistribute direct route-map permit-bgp-ospf
+    redistribute bgp 65000 route-map permit-bgp-ospf
+router bgp 65000
+  router-id 10.0.0.6
+  address-family ipv4 unicast
+  address-family l2vpn evpn
+    retain route-target all
+  neighbor 10.0.0.1
+    remote-as 65000
+    update-source loopback0
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+    address-family l2vpn evpn
+      send-community
+      send-community extended
+  neighbor 10.0.0.2
+    remote-as 65000
+    update-source loopback0
+    address-family ipv4 unicast
+      send-community
+      send-community extended
+    address-family l2vpn evpn
+      send-community
+      send-community extended
+  vrf Tenant-1
+    address-family ipv4 unicast
+      advertise l2vpn evpn
+      redistribute ospf 1 route-map permit-ospf-bgp
+evpn
+  vni 50140 l2
+    rd auto
+    route-target import auto
+    route-target export auto
+  vni 50141 l2
+    rd auto
+    route-target import auto
+    route-target export auto</entry>
+        </extensions>
+        <interface id="0" name="Ethernet1/1" ipv4="10.100.100.22" netPrefixLenV4="30"/>
+        <interface id="1" name="Ethernet1/2" ipv4="10.100.100.42" netPrefixLenV4="30"/>
+        <interface id="2" name="Ethernet1/3" ipv4="10.100.100.50" netPrefixLenV4="30"/>
+    </node>
+    <node name="WAN" type="SIMPLE" subtype="CSR1000v" location="643,110" ipv4="10.0.0.10">
+        <extensions>
+            <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
+            <entry key="config" type="String">!
+! Last configuration change at 15:26:46 UTC Fri Dec 22 2017
+!
+version 16.6
+service timestamps debug datetime msec
+service timestamps log datetime msec
+platform qfp utilization monitor load 80
+no platform punt-keepalive disable-kernel-core
+platform console serial
+!
+hostname WAN
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition Mgmt-intf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+enable secret 4 tnhtc92DXBhelxjYk8LWJrPV36S2i4ntXrpb4RFmfqY
+enable password cisco
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name virl.info
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+! 
+! 
+! 
+! 
+!
+ipv6 unicast-routing
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-64218175
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-64218175
+ revocation-check none
+ rsakeypair TP-self-signed-64218175
+!
+crypto pki trustpoint TP-self-signed-2695817245
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2695817245
+ revocation-check none
+ rsakeypair TP-self-signed-2695817245
+!
+crypto pki trustpoint TP-self-signed-2589134416
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2589134416
+ revocation-check none
+ rsakeypair TP-self-signed-2589134416
+!
+!
+crypto pki certificate chain TP-self-signed-64218175
+ certificate self-signed 01 nvram:IOS-Self-Sig#1.cer
+crypto pki certificate chain TP-self-signed-2695817245
+crypto pki certificate chain TP-self-signed-2589134416
+!
+!
+!
+!
+!
+!
+!
+!
+!
+license udi pid CSR1000V sn 9GISJY1V6T5
+license accept end user agreement
+license boot level ax
+diagnostic bootup level minimal
+spanning-tree extend system-id
+!
+!
+!
+username cisco privilege 15 secret 5 $1$Bnts$oC8WMmoFeWtugcYYPloFS0
+!
+redundancy
+!
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+! 
+!
+!
+interface Loopback0
+ description Loopback
+ ip address 10.0.0.7 255.255.255.255
+!
+interface GigabitEthernet1
+ description OOB Management
+ vrf forwarding Mgmt-intf
+ ip address 10.255.0.9 255.255.0.0
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet2
+ description to Leaf-4
+ mtu 9216
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet2.101
+ description Customer-1
+ encapsulation dot1Q 101
+ ip address 10.10.10.17 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf cost 1
+!
+interface GigabitEthernet3
+ description to server-3
+ ip address 172.21.1.1 255.255.255.0
+ ip ospf cost 1
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ cdp enable
+!
+router ospf 1
+ router-id 10.0.0.7
+ redistribute static subnets
+ passive-interface Loopback0
+ network 10.10.10.16 0.0.0.3 area 0
+ network 172.21.1.0 0.0.0.255 area 0
+ network 192.168.0.5 0.0.0.0 area 0
+!
+!
+virtual-service csr_mgmt
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh server algorithm authentication password
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+line con 0
+ password cisco
+ stopbits 1
+line vty 0 4
+ exec-timeout 720 0
+ password cisco
+ login local
+ transport input telnet ssh
+!
+!
+!
+!
+!
+!
+end</entry>
+        </extensions>
+        <interface id="0" name="GigabitEthernet2" ipv4="10.100.100.49" netPrefixLenV4="30"/>
+        <interface id="1" name="GigabitEthernet3" ipv4="10.100.100.45" netPrefixLenV4="30"/>
+    </node>
+    <node name="server-1" type="SIMPLE" subtype="server" location="130,339">
+        <extensions>
+            <entry key="config" type="String">#cloud-config
+bootcmd:
+- ln -s -t /etc/rc.d /etc/rc.local
+hostname: server-1
+manage_etc_hosts: true
+runcmd:
+- start ttyS0
+- systemctl start getty@ttyS0.service
+- systemctl start rc-local
+- sed -i '/^\s*PasswordAuthentication\s\+no/d' /etc/ssh/sshd_config
+- echo "UseDNS no" &gt;&gt; /etc/ssh/sshd_config
+- service ssh restart
+- service sshd restart
+users:
+- default
+- gecos: User configured by VIRL Configuration Engine 0.23.10
+  lock-passwd: false
+  name: cisco
+  plain-text-passwd: cisco
+  shell: /bin/bash
+  ssh-authorized-keys:
+  - VIRL-USER-SSH-PUBLIC-KEY
+  sudo: ALL=(ALL) ALL
+write_files:
+- path: /etc/init/ttyS0.conf
+  owner: root:root
+  content: |
+    # ttyS0 - getty
+    # This service maintains a getty on ttyS0 from the point the system is
+    # started until it is shut down again.
+    start on stopped rc or RUNLEVEL=[12345]
+    stop on runlevel [!12345]
+    respawn
+    exec /sbin/getty -L 115200 ttyS0 vt102
+  permissions: '0644'
+- path: /etc/systemd/system/dhclient@.service
+  content: |
+    [Unit]
+    Description=Run dhclient on %i interface
+    After=network.target
+    [Service]
+    Type=oneshot
+    ExecStart=/sbin/dhclient %i -pf /var/run/dhclient.%i.pid -lf /var/lib/dhclient/dhclient.%i.lease
+    RemainAfterExit=yes
+  owner: root:root
+  permissions: '0644'
+- path: /etc/rc.local
+  owner: root:root
+  permissions: '0755'
+  content: |-
+    #!/bin/sh
+    ifconfig eth1 up 172.21.140.10 netmask 255.255.255.0
+    route add -host 172.21.0.0/16 gw 172.21.140.1 dev eth1
+    exit 0
+</entry>
+        </extensions>
+        <interface id="0" name="eth1" ipv4="10.100.100.6" netPrefixLenV4="30"/>
+    </node>
+    <node name="server-2" type="SIMPLE" subtype="server" location="380,334">
+        <extensions>
+            <entry key="config" type="String">#cloud-config
+bootcmd:
+- ln -s -t /etc/rc.d /etc/rc.local
+hostname: server-2
+manage_etc_hosts: true
+runcmd:
+- start ttyS0
+- systemctl start getty@ttyS0.service
+- systemctl start rc-local
+- sed -i '/^\s*PasswordAuthentication\s\+no/d' /etc/ssh/sshd_config
+- echo "UseDNS no" &gt;&gt; /etc/ssh/sshd_config
+- service ssh restart
+- service sshd restart
+users:
+- default
+- gecos: User configured by VIRL Configuration Engine 0.23.10
+  lock-passwd: false
+  name: cisco
+  plain-text-passwd: cisco
+  shell: /bin/bash
+  ssh-authorized-keys:
+  - VIRL-USER-SSH-PUBLIC-KEY
+  sudo: ALL=(ALL) ALL
+write_files:
+- path: /etc/init/ttyS0.conf
+  owner: root:root
+  content: |
+    # ttyS0 - getty
+    # This service maintains a getty on ttyS0 from the point the system is
+    # started until it is shut down again.
+    start on stopped rc or RUNLEVEL=[12345]
+    stop on runlevel [!12345]
+    respawn
+    exec /sbin/getty -L 115200 ttyS0 vt102
+  permissions: '0644'
+- path: /etc/systemd/system/dhclient@.service
+  content: |
+    [Unit]
+    Description=Run dhclient on %i interface
+    After=network.target
+    [Service]
+    Type=oneshot
+    ExecStart=/sbin/dhclient %i -pf /var/run/dhclient.%i.pid -lf /var/lib/dhclient/dhclient.%i.lease
+    RemainAfterExit=yes
+  owner: root:root
+  permissions: '0644'
+- path: /etc/rc.local
+  owner: root:root
+  permissions: '0755'
+  content: |-
+    #!/bin/sh
+    ifconfig eth1 up 172.21.141.10 netmask 255.255.255.0
+    route add -host 172.21.0.0/16 gw 172.21.141.1 dev eth1
+    exit 0
+</entry>
+        </extensions>
+        <interface id="0" name="eth1" ipv4="10.100.100.38" netPrefixLenV4="30"/>
+    </node>
+    <node name="server-3" type="SIMPLE" subtype="server" location="797,42">
+        <extensions>
+            <entry key="config" type="String">#cloud-config
+bootcmd:
+- ln -s -t /etc/rc.d /etc/rc.local
+hostname: server-3
+manage_etc_hosts: true
+runcmd:
+- start ttyS0
+- systemctl start getty@ttyS0.service
+- systemctl start rc-local
+- sed -i '/^\s*PasswordAuthentication\s\+no/d' /etc/ssh/sshd_config
+- echo "UseDNS no" &gt;&gt; /etc/ssh/sshd_config
+- service ssh restart
+- service sshd restart
+users:
+- default
+- gecos: User configured by VIRL Configuration Engine 0.23.10
+  lock-passwd: false
+  name: cisco
+  plain-text-passwd: cisco
+  shell: /bin/bash
+  ssh-authorized-keys:
+  - VIRL-USER-SSH-PUBLIC-KEY
+  sudo: ALL=(ALL) ALL
+write_files:
+- path: /etc/init/ttyS0.conf
+  owner: root:root
+  content: |
+    # ttyS0 - getty
+    # This service maintains a getty on ttyS0 from the point the system is
+    # started until it is shut down again.
+    start on stopped rc or RUNLEVEL=[12345]
+    stop on runlevel [!12345]
+    respawn
+    exec /sbin/getty -L 115200 ttyS0 vt102
+  permissions: '0644'
+- path: /etc/systemd/system/dhclient@.service
+  content: |
+    [Unit]
+    Description=Run dhclient on %i interface
+    After=network.target
+    [Service]
+    Type=oneshot
+    ExecStart=/sbin/dhclient %i -pf /var/run/dhclient.%i.pid -lf /var/lib/dhclient/dhclient.%i.lease
+    RemainAfterExit=yes
+  owner: root:root
+  permissions: '0644'
+- path: /etc/rc.local
+  owner: root:root
+  permissions: '0755'
+  content: |-
+    #!/bin/sh
+    ifconfig eth1 up 172.21.1.10 netmask 255.255.255.0
+    route add -host 172.21.0.0/16 gw 172.21.1.1 dev eth1
+    exit 0
+</entry>
+        </extensions>
+        <interface id="0" name="eth1" ipv4="10.100.100.46" netPrefixLenV4="30"/>
+    </node>
+    <node name="Management Server" type="SIMPLE" subtype="server" location="772,347">
+        <extensions>
+            <entry key="config" type="String">#cloud-config
+bootcmd:
+- ln -s -t /etc/rc.d /etc/rc.local
+hostname: Management_Server
+manage_etc_hosts: true
+runcmd:
+- start ttyS0
+- systemctl start getty@ttyS0.service
+- systemctl start rc-local
+- sed -i '/^\s*PasswordAuthentication\s\+no/d' /etc/ssh/sshd_config
+- echo "UseDNS no" &gt;&gt; /etc/ssh/sshd_config
+- service ssh restart
+- service sshd restart
+users:
+- default
+- gecos: User configured by VIRL Configuration Engine 0.23.10
+  lock-passwd: false
+  name: cisco
+  plain-text-passwd: cisco
+  shell: /bin/bash
+  ssh-authorized-keys:
+  - VIRL-USER-SSH-PUBLIC-KEY
+  sudo: ALL=(ALL) ALL
+write_files:
+- path: /etc/init/ttyS0.conf
+  owner: root:root
+  content: |
+    # ttyS0 - getty
+    # This service maintains a getty on ttyS0 from the point the system is
+    # started until it is shut down again.
+    start on stopped rc or RUNLEVEL=[12345]
+    stop on runlevel [!12345]
+    respawn
+    exec /sbin/getty -L 115200 ttyS0 vt102
+  permissions: '0644'
+- path: /etc/systemd/system/dhclient@.service
+  content: |
+    [Unit]
+    Description=Run dhclient on %i interface
+    After=network.target
+    [Service]
+    Type=oneshot
+    ExecStart=/sbin/dhclient %i -pf /var/run/dhclient.%i.pid -lf /var/lib/dhclient/dhclient.%i.lease
+    RemainAfterExit=yes
+  owner: root:root
+  permissions: '0644'
+</entry>
+        </extensions>
+    </node>
+    <annotations/>
+    <connection dst="/virl:topology/virl:node[1]/virl:interface[1]" src="/virl:topology/virl:node[3]/virl:interface[1]"/>
+    <connection dst="/virl:topology/virl:node[2]/virl:interface[1]" src="/virl:topology/virl:node[3]/virl:interface[2]"/>
+    <connection dst="/virl:topology/virl:node[1]/virl:interface[2]" src="/virl:topology/virl:node[4]/virl:interface[1]"/>
+    <connection dst="/virl:topology/virl:node[2]/virl:interface[2]" src="/virl:topology/virl:node[4]/virl:interface[2]"/>
+    <connection dst="/virl:topology/virl:node[1]/virl:interface[3]" src="/virl:topology/virl:node[5]/virl:interface[1]"/>
+    <connection dst="/virl:topology/virl:node[2]/virl:interface[3]" src="/virl:topology/virl:node[5]/virl:interface[2]"/>
+    <connection dst="/virl:topology/virl:node[1]/virl:interface[4]" src="/virl:topology/virl:node[6]/virl:interface[1]"/>
+    <connection dst="/virl:topology/virl:node[2]/virl:interface[4]" src="/virl:topology/virl:node[6]/virl:interface[2]"/>
+    <connection dst="/virl:topology/virl:node[7]/virl:interface[1]" src="/virl:topology/virl:node[6]/virl:interface[3]"/>
+    <connection dst="/virl:topology/virl:node[9]/virl:interface[1]" src="/virl:topology/virl:node[5]/virl:interface[3]"/>
+    <connection dst="/virl:topology/virl:node[8]/virl:interface[1]" src="/virl:topology/virl:node[3]/virl:interface[3]"/>
+    <connection dst="/virl:topology/virl:node[10]/virl:interface[1]" src="/virl:topology/virl:node[7]/virl:interface[2]"/>
+</topology>

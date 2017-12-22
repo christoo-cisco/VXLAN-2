@@ -1,0 +1,236 @@
+version 16.6
+service timestamps debug datetime msec
+service timestamps log datetime msec
+platform qfp utilization monitor load 80
+no platform punt-keepalive disable-kernel-core
+platform console serial
+!
+hostname WAN
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition Mgmt-intf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+enable secret 4 tnhtc92DXBhelxjYk8LWJrPV36S2i4ntXrpb4RFmfqY
+enable password cisco
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name virl.info
+!
+!
+!
+!
+!
+!         
+!
+!
+!
+!
+subscriber templating
+! 
+! 
+! 
+! 
+!
+ipv6 unicast-routing
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-64218175
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-64218175
+ revocation-check none
+ rsakeypair TP-self-signed-64218175
+!
+crypto pki trustpoint TP-self-signed-2695817245
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2695817245
+ revocation-check none
+ rsakeypair TP-self-signed-2695817245
+!
+crypto pki trustpoint TP-self-signed-2589134416
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2589134416
+ revocation-check none
+ rsakeypair TP-self-signed-2589134416
+!
+!
+crypto pki certificate chain TP-self-signed-64218175
+ certificate self-signed 01
+  3082032C 30820214 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  2F312D30 2B060355 04031324 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 36343231 38313735 301E170D 31373132 32313233 30323030 
+  5A170D32 30303130 31303030 3030305A 302F312D 302B0603 55040313 24494F53 
+  2D53656C 662D5369 676E6564 2D436572 74696669 63617465 2D363432 31383137 
+  35308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 0A028201 
+  0100AB19 AAB26387 8691D34A 8A437ED6 81087E43 316D91E8 6BCBE7E2 B1313511 
+  D597FA03 3DBEEA00 A2C88F62 49230FEE AE3A5142 965272B3 1DAD7CC1 BB703B48 
+  89DBAE5B 0C158EA4 AE9ADE8B CBCD1192 6F545923 3A2B1ED8 47BB2935 FC5DE538 
+  1EE6FFCC 736B1520 A9C9D8C2 B211A962 16F8C3D8 23FE6D86 517993EA E1698E02 
+  C7CED0E3 62122156 093D09F0 6BEB3B16 029761D7 FF875929 ACC25532 60957C7A 
+  2AE1BA3A 4CA23A6A 1239FA38 A09EF1E8 5503ABDC DEB4B8A4 51DB0AB1 E2164ACB 
+  817E41DB EE5CBE20 A83E45BB DF0082EB 63CDE50A B0CACBE7 D6F9232B 2276A5B3 
+  EC44C4F1 979F0A35 C693F8D0 03D996ED 3F5D850D AED09D6F B17694EA E7F0DC5F 
+  A4CD0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603 
+  551D2304 18301680 149FEAB3 2DF119BA 18C3954B C844AA7A B8853075 12301D06 
+  03551D0E 04160414 9FEAB32D F119BA18 C3954BC8 44AA7AB8 85307512 300D0609 
+  2A864886 F70D0101 05050003 82010100 7C8FC2E2 E670EB68 9EE26AB9 2D1BC7D3 
+  BB7134A5 E28AA2D1 4B8C7336 1EDECCB3 C13DF1CB 63B0052B A6FE8E32 AFCB0F64 
+  543F0332 04BFC249 95C44631 3B6B265B A130C644 23BBF0CA 0F1DD075 366F37C2 
+  AA77F316 13A302E2 C4F9A00B 51CE7F49 396DF381 EFB08CFE 3481B392 B6A81BFE 
+  DEADDBFA F8931F74 C30B1545 063459D3 BDCC8FBE 4F2F47FA 6E51DEF6 9CB121BE 
+  CD524506 D79ED241 4CC5862A 2168E040 47310F05 8DCE60D3 3420FB59 5A03A581 
+  99002FBC 644E8F5E E808ED7A 22E16787 5F3748FD 9A7B3995 B4C8B9C9 AC89D288 
+  373D2F6D 1DE774E0 94EAB2C4 CBBD2E1E 1CE12EF7 9B02F787 0CCCD325 AE9224E4 
+  4E852CDA CCC7AC93 D3BF4894 76E8DD09
+        quit
+crypto pki certificate chain TP-self-signed-2695817245
+crypto pki certificate chain TP-self-signed-2589134416
+!
+!
+!
+!
+!
+!
+!
+!
+!
+license udi pid CSR1000V sn 9GISJY1V6T5
+license accept end user agreement
+license boot level ax
+diagnostic bootup level minimal
+spanning-tree extend system-id
+!
+!
+!
+username cisco privilege 15 secret 5 $1$Bnts$oC8WMmoFeWtugcYYPloFS0
+!
+redundancy
+!
+!
+!         
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+! 
+!
+!
+interface Loopback0
+ description Loopback
+ ip address 10.0.0.7 255.255.255.255
+!
+interface GigabitEthernet1
+ description OOB Management
+ vrf forwarding Mgmt-intf
+ ip address 10.255.0.9 255.255.0.0
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet2
+ description to Leaf-4
+ mtu 9216
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet2.101
+ description Customer-1
+ encapsulation dot1Q 101
+ ip address 10.10.10.17 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf cost 1
+!
+interface GigabitEthernet3
+ description to server-3
+ ip address 172.21.1.1 255.255.255.0
+ ip ospf cost 1
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ cdp enable
+!
+router ospf 1
+ router-id 10.0.0.7
+ redistribute static subnets
+ passive-interface Loopback0
+ network 10.10.10.16 0.0.0.3 area 0
+ network 172.21.1.0 0.0.0.255 area 0
+ network 192.168.0.5 0.0.0.0 area 0
+!
+!
+virtual-service csr_mgmt
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh server algorithm authentication password
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+line con 0
+ password cisco
+ stopbits 1
+line vty 0 4
+ exec-timeout 720 0
+ password cisco
+ login local
+ transport input telnet ssh
+!
+!
+!
+!
+!
+!
+end
